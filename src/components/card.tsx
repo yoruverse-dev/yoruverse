@@ -9,8 +9,6 @@ export type Character = Tables<'characters'>
 export function Card({ name, media, favourites, image, remaining }: Character & { remaining: number }) {
     const stars = calculateStars(favourites ?? 0);
 
-    console.log('remaining', remaining);
-
     return (
         <section className='relative'>
             <div
