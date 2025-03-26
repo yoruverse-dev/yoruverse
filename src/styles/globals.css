@@ -7,6 +7,6 @@
 
 @layer base {
   body {
-    @apply font-sans antialiased;
+    @apply font-sans antialiased bg-zinc-950 text-zinc-300 text-sm;
   }
 }
