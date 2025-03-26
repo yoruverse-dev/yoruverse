@@ -17,7 +17,7 @@ export function Card({ name, media, favourites, image, remaining }: Character & 
                 className={cn(
                     'flex flex-col z-10',
                     'w-2xs h-112 overflow-hidden',
-                    'bg-zinc-900 rounded-xl ring-4 ring-zinc-700',
+                    'bg-zinc-900 rounded-xl ring ring-zinc-700',
                 )}
             >
                 <figure
@@ -56,10 +56,10 @@ export function Card({ name, media, favourites, image, remaining }: Character & 
                 {Array.from({ length: remaining }).map((_, index) => (
                     <span
                         key={index}
-                        className='absolute -z-1 top-0 w-2xs h-112 bg-zinc-900 rounded-xl ring-4 ring-zinc-700'
+                        className='absolute -z-1 top-0 w-2xs h-112 bg-zinc-900/60 rounded-xl ring ring-zinc-700/60'
                         style={{
-                            right: `${index * 10}px`,
-                            transform: `translateX(${remaining * 10}px)`,
+                            right: `${index * 5}px`,
+                            transform: `translateX(${remaining * 5}px)`,
                         }}
                     />
                 ))}

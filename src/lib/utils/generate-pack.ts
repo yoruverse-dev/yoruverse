@@ -9,7 +9,7 @@ export async function generatePack() {
     const supabase = await createClient();
 
     const { data, error } = await supabase.rpc('generate_pack', {
-        min_favourites: 100,
+        min_favourites: 50,
         card_amount: cardAmount,
     });
 
