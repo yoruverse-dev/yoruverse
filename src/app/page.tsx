@@ -3,15 +3,15 @@
 import { Fragment, useState } from 'react';
 
 import { generatePack } from '@/lib/utils/generate-pack';
-
-import { Card, CardProps } from '@/components/card';
-import { Button } from '@/components/atoms/button';
 import { cn } from '@/lib/utils/cn';
+
+import { Card, type Character } from '@/components/card';
+import { Button } from '@/components/atoms/button';
 import { Pack } from '@/components/pack';
 import { Loader } from 'lucide-react';
 
 export default function Home() {
-    const [cards, setCards] = useState<CardProps[]>([]);
+    const [cards, setCards] = useState<Character[]>([]);
     const [currentCard, setCurrentCard] = useState(0);
     const [loading, setLoading] = useState(false);
 
@@ -60,12 +60,7 @@ export default function Home() {
                 </Fragment>
             ) : (
                 <Fragment>
-                    <Card
-                        name={cards[currentCard].name}
-                        media={cards[currentCard].media}
-                        image={cards[currentCard].image}
-                        favourites={cards[currentCard].favourites}
-                    />
+                    <Card {...cards[currentCard]} />
                     <div className='w-full max-w-2xs flex items-center gap-5'>
                         <Button
                             variant='bordered'

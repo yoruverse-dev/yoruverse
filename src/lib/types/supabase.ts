@@ -66,7 +66,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_pack: {
+        Args: {
+          min_favourites: number
+          card_amount: number
+        }
+        Returns: {
+          created_at: string | null
+          favourites: number | null
+          id: number
+          image: string | null
+          media: string[] | null
+          name: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

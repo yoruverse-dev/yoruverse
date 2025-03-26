@@ -2,15 +2,11 @@ import { calculateStars } from '@/lib/utils/calculate-stars';
 import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
 import Image from 'next/image';
+import { Tables } from '@/lib/types/supabase';
 
-export interface CardProps {
-    name: string;
-    media: string[] | null;
-    image: string | null;
-    favourites: number | null;
-}
+export type Character = Tables<'characters'>
 
-export function Card({ name, media, favourites, image }: CardProps) {
+export function Card({ name, media, favourites, image }: Character) {
     const stars = calculateStars(favourites ?? 0);
 
     console.log('stars', stars);
