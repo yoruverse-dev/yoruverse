@@ -1,24 +1,47 @@
 import { cn } from '@/lib/utils/cn';
-import { PropsWithChildren } from 'react';
+import Link from 'next/link';
+import { Fragment, PropsWithChildren } from 'react';
 
 type ButtonProps = {
     variant: 'primary' | 'bordered';
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+    href?: never;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-export function Button({ variant, className, children, ...props }: PropsWithChildren<ButtonProps>) {
+type LinkButtonProps = {
+    variant: 'primary' | 'bordered';
+    href: string;
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>
+
+export function Button({ variant, className, children, href, ...props }: PropsWithChildren<ButtonProps | LinkButtonProps>) {
+
+    const classNames = cn(
+        'flex items-center justify-center gap-2.5',
+        'h-9 px-5 rounded-xl font-medium cursor-pointer transition-colors',
+        variant === 'primary' && 'bg-indigo-400 hover:bg-indigo-300 text-zinc-900',
+        variant === 'bordered' && 'bg-zinc-900 hover:bg-zinc-800 text-zinc-50 border border-zinc-700',
+        className
+    );
+
     return (
-        <button
-            className={cn(
-                'flex items-center justify-center gap-2.5',
-                'h-9 px-5 rounded-xl font-medium cursor-pointer transition-colors',
-                variant === 'primary' && 'bg-indigo-400 hover:bg-indigo-300 text-zinc-900',
-                variant === 'bordered' && 'bg-zinc-900 hover:bg-zinc-800 text-zinc-50 border border-zinc-700',
-                className
-            )}
-            {...props}
-        >
-            {children}
-        </button>
+        <Fragment>
+            {
+                href ? (
+                    <Link
+                        className={classNames}
+                        href={href}
+                        {...props as React.AnchorHTMLAttributes<HTMLAnchorElement>}
+                    >
+                        {children}
+                    </Link>
+                ) :
+                    <button
+                        className={classNames}
+                        {...props as React.ButtonHTMLAttributes<HTMLButtonElement>}
+                    >
+                        {children}
+                    </button >
+            }
+        </Fragment>
     );
 
 }

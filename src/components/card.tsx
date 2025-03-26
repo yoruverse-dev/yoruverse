@@ -6,50 +6,64 @@ import { Tables } from '@/lib/types/supabase';
 
 export type Character = Tables<'characters'>
 
-export function Card({ name, media, favourites, image }: Character) {
+export function Card({ name, media, favourites, image, remaining }: Character & { remaining: number }) {
     const stars = calculateStars(favourites ?? 0);
 
-    console.log('stars', stars);
+    console.log('remaining', remaining);
 
     return (
-        <div
-            className={cn(
-                'flex flex-col',
-                'w-2xs h-112',
-                'bg-zinc-900 rounded-xl ring-4 ring-zinc-700',
-            )}
-        >
-            <figure
+        <section className='relative'>
+            <div
                 className={cn(
-                    'relative',
-                    'size-full',
-                    'bg-zinc-800'
-                )}>
-                {image && (
-                    <Image
-                        src={image}
-                        alt={name ?? ''}
-                        fill
-                        className='object-cover rounded-t-xl'
-                    />
+                    'flex flex-col z-10',
+                    'w-2xs h-112 overflow-hidden',
+                    'bg-zinc-900 rounded-xl ring-4 ring-zinc-700',
                 )}
-            </figure>
-            <footer
-                className={cn(
-                    'flex flex-col gap-2.5',
-                    'p-5'
-                )}>
-                <p className='font-semibold text-zinc-50'>{name}</p>
-                <p className='text-sm truncate text-ellipsis'>{media?.[0]}</p>
-                <div className='flex items-center gap-1.5'>
-                    {Array.from({ length: stars }, (_, index) => (
-                        <Star
-                            key={index}
-                            className='size-4 text-amber-200 fill-amber-200'
+            >
+                <figure
+                    className={cn(
+                        'relative',
+                        'size-full',
+                        'bg-zinc-800'
+                    )}>
+                    {image && (
+                        <Image
+                            src={image}
+                            alt={name ?? ''}
+                            fill
+                            className='object-cover rounded-t-xl'
                         />
-                    ))}
-                </div>
-            </footer>
-        </div>
+                    )}
+                </figure>
+                <footer
+                    className={cn(
+                        'flex flex-col gap-2.5',
+                        'p-5'
+                    )}>
+                    <p className='font-semibold text-zinc-50'>{name}</p>
+                    <p className='text-sm truncate text-ellipsis'>{media?.[0]}</p>
+                    <div className='flex items-center gap-1.5'>
+                        {Array.from({ length: stars }, (_, index) => (
+                            <Star
+                                key={index}
+                                className='size-4 text-amber-200 fill-amber-200'
+                            />
+                        ))}
+                    </div>
+                </footer>
+            </div>
+            <div>
+                {Array.from({ length: remaining }).map((_, index) => (
+                    <span
+                        key={index}
+                        className='absolute -z-1 top-0 w-2xs h-112 bg-zinc-900 rounded-xl ring-4 ring-zinc-700'
+                        style={{
+                            right: `${index * 10}px`,
+                            transform: `translateX(${remaining * 10}px)`,
+                        }}
+                    />
+                ))}
+            </div>
+        </section>
     );
 }

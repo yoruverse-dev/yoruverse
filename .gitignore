@@ -16,6 +16,7 @@
 # next.js
 /.next/
 /out/
+/src/lib/utils/upload-characters.ts
 
 # production
 /build
