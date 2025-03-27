@@ -3,14 +3,14 @@
 import { appConfig } from '@/config/app';
 import { createClient } from '@/lib/db/server';
 
-const { cardAmount } = appConfig.pack;
+const { cardAmount, minFavourites } = appConfig.pack;
 
 export async function generatePack() {
     const supabase = await createClient();
 
     const { data, error } = await supabase.rpc('generate_pack', {
-        min_favourites: 50,
-        card_amount: cardAmount,
+        min_favourites: minFavourites,
+        card_amount: cardAmount
     });
 
     if (error) {

@@ -26,6 +26,7 @@ export function Card({ name, media, favourites, image, remaining }: Character & 
                     )}>
                     {image && (
                         <Image
+                            key={image}
                             src={image}
                             alt={name ?? ''}
                             fill

@@ -9,6 +9,7 @@ const appConfigSchema = z.object({
     }),
     pack: z.object({
         cardAmount: z.number().int().positive(),
+        minFavourites: z.number().int().positive()
     }),
 });
 
@@ -23,5 +24,6 @@ export const appConfig: AppConfig = appConfigSchema.parse({
     },
     pack: {
         cardAmount: 5,
+        minFavourites: 25,
     }
 });
